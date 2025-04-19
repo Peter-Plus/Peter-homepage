@@ -1,0 +1,377 @@
+/* 
+ * sections.css
+ * 各个页面模块样式，如 hero、profile-card、skills、projects、contact 等
+ */
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+}
+
+.hero-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.hero-content {
+    max-width: 100%;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s forwards;
+    animation-delay: 0.2s;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s forwards;
+    animation-delay: 0.4s;
+}
+
+/* Profile Card */
+.profile-card {
+    position: relative;
+    width: 100%; /* 改为100%宽度而不是固定宽度 */
+    max-width: 400px;
+    height: auto; /* 高度自适应内容 */
+    min-height: 400px; /* 保持最小高度 */
+    margin: 0 auto;
+    perspective: 1000px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s forwards;
+    animation-delay: 0.6s;
+}
+
+.profile-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 400px; /* 确保内部容器也有最小高度 */
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+  }
+
+.profile-card:hover .profile-card-inner {
+    transform: rotateY(180deg);
+}
+
+.profile-card-front, .profile-card-back {
+    position: absolute;
+    width: 100%;
+    height: auto; /* 让高度适应内容 */
+    min-height: 100%; /* 确保至少和父容器一样高 */
+    backface-visibility: hidden;
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+.profile-card-front {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    align-items: center;
+    justify-content: center;
+    z-index: 2; /* 确保前面在上层 */
+}
+
+.profile-card-back {
+    background-color: var(--card-bg);
+    color: var(--text-primary);
+    transform: rotateY(180deg);
+    justify-content: center;
+    overflow-y: auto; /* 允许垂直滚动，以防内容过多 */
+}
+
+.profile-img-container {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    border: 3px solid var(--accent);
+}
+
+.profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--accent);
+}
+
+.profile-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.profile-info h2 {
+    font-size: 1.75rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.profile-info h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.profile-details {
+    margin-top: 1rem;
+}
+
+.profile-detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.profile-detail-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: var(--accent);
+}
+
+/* Skills Section */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.skill-card {
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.skill-icon {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    transition: color var(--transition-normal);
+}
+
+.skill-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.skill-list {
+    list-style: none;
+    margin-left: 0;
+}
+
+.skill-list li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    transition: color var(--transition-normal);
+}
+
+.skill-list li::before {
+    content: "•";
+    color: var(--accent);
+    font-weight: bold;
+    margin-right: 0.75rem;
+    transition: color var(--transition-normal);
+}
+
+/* Projects Section */
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    overflow: hidden;
+    border-radius: 0.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-img {
+    height: 200px;
+    background-color: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--accent);
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+.project-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.project-content p {
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+.project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+}
+
+/* Achievements Section */
+.achievements-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.achievement-item {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    border-left: 3px solid var(--accent);
+    position: relative;
+    transition: border-color var(--transition-normal);
+}
+
+/* Contact Section */
+.contact-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.contact-text {
+    margin-bottom: 2.5rem;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.1rem;
+    transition: transform var(--transition-normal);
+}
+
+.contact-link:hover {
+    transform: translateX(10px);
+}
+
+.contact-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--bg-secondary);
+    border-radius: 50%;
+    font-size: 1.25rem;
+    color: var(--accent);
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* Responsive Sections */
+@media (max-width: 992px) {
+    .hero h1 {
+        font-size: 2.75rem;
+    }
+    
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+    
+    .profile-card {
+        max-width: 350px;
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.25rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .hero-buttons .btn {
+        width: 100%;
+    }
+    
+    .skills-container,
+    .projects-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .profile-card {
+        max-width: 300px;
+        height: 300px;
+    }
+    
+    .profile-img-container {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* 确保手机上的显示正常 */
+@media (max-width: 768px) {
+    .profile-card {
+      width: 100%;
+      max-width: 330px;
+      min-height: 350px;
+    }
+    
+    .profile-card-inner {
+      min-height: 350px;
+    }
+    
+    .profile-card-front, .profile-card-back {
+      padding: 1.5rem;
+    }
+  }
+  
+}

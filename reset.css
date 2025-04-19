@@ -1,0 +1,133 @@
+/* 
+ * reset.css
+ * 包含 CSS Reset、字体、全局变量、通用规则
+ */
+
+/* CSS Variables for Theming */
+:root {
+    /* Light Mode Colors */
+    --bg-primary-light: #ffffff;
+    --bg-secondary-light: #f8f9fa;
+    --text-primary-light: #333333;
+    --text-secondary-light: #6c757d;
+    --accent-light: #3b82f6;
+    --accent-hover-light: #2563eb;
+    --card-bg-light: #ffffff;
+    --card-shadow-light: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+    --border-light: #f0f0f0;
+    
+    /* Dark Mode Colors */
+    --bg-primary-dark: #121212;
+    --bg-secondary-dark: #1e1e1e;
+    --text-primary-dark: #f0f0f0;
+    --text-secondary-dark: #a6a6a6;
+    --accent-dark: #6ea8fe;
+    --accent-hover-dark: #90b8fe;
+    --card-bg-dark: #252525;
+    --card-shadow-dark: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    --border-dark: #333333;
+    
+    /* Active Theme (starts with light mode) */
+    --bg-primary: var(--bg-primary-light);
+    --bg-secondary: var(--bg-secondary-light);
+    --text-primary: var(--text-primary-light);
+    --text-secondary: var(--text-secondary-light);
+    --accent: var(--accent-light);
+    --accent-hover: var(--accent-hover-light);
+    --card-bg: var(--card-bg-light);
+    --card-shadow: var(--card-shadow-light);
+    --border: var(--border-light);
+    
+    /* Typography */
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    
+    /* Layout */
+    --section-spacing: 6rem;
+    --container-width: 1140px;
+    --container-padding: 1.5rem;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    line-height: 1.6;
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: var(--text-primary);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    transition: color var(--transition-normal);
+}
+
+p {
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    transition: color var(--transition-normal);
+}
+
+a {
+    text-decoration: none;
+    color: var(--accent);
+    transition: color var(--transition-normal);
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+ul, ol {
+    margin-left: 1.5rem;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    --bg-primary: var(--bg-primary-dark);
+    --bg-secondary: var(--bg-secondary-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --accent: var(--accent-dark);
+    --accent-hover: var(--accent-hover-dark);
+    --card-bg: var(--card-bg-dark);
+    --card-shadow: var(--card-shadow-dark);
+    --border: var(--border-dark);
+}
+
+/* Animations */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes rotateIcon {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

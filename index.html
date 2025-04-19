@@ -3,563 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unity Developer Portfolio</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.22.5/babel.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <style>
-        /* CSS Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-        }
-
-        :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --dark-color: #1f2937;
-            --light-color: #f3f4f6;
-            --text-color: #374151;
-            --border-color: #e5e7eb;
-            --success-color: #10b981;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            color: var(--text-color);
-            background-color: var(--light-color);
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--primary-color);
-            transition: all 0.3s ease;
-        }
-
-        a:hover {
-            color: var(--secondary-color);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Header and Navigation */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        nav {
-            height: 70px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--dark-color);
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            cursor: pointer;
-            font-size: 1.5rem;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: calc(100vh - 70px);
-            display: flex;
-            align-items: center;
-            background-color: white;
-            padding: 4rem 0;
-        }
-
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--dark-color);
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            max-width: 600px;
-        }
-
-        .highlight {
-            color: var(--primary-color);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.8rem 1.5rem;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 0.375rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        /* Section Styles */
-        section {
-            padding: 6rem 0;
-        }
-
-        section:nth-child(even) {
-            background-color: white;
-        }
-
-        .section-heading {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-heading h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--dark-color);
-            margin-bottom: 1rem;
-        }
-
-        .section-heading p {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        /* Skills Section */
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-card {
-            background-color: white;
-            border-radius: 0.5rem;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .skill-icon {
-            font-size: 2.5rem;
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-        }
-
-        .skill-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-list li {
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .skill-list li::before {
-            content: "•";
-            color: var(--primary-color);
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-
-        /* Projects Section */
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background-color: white;
-            border-radius: 0.5rem;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .project-img {
-            height: 200px;
-            background-color: var(--dark-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 2rem;
-        }
-
-        .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-content h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .project-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        /* Contact Section */
-        .contact-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .contact-info {
-            background-color: white;
-            border-radius: 0.5rem;
-            padding: 2rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        .contact-info h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-list {
-            list-style: none;
-        }
-
-        .contact-list li {
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .contact-icon {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            margin-right: 1rem;
-            width: 30px;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                position: fixed;
-                top: 70px;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                flex-direction: column;
-                padding: 2rem;
-                gap: 1rem;
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                transform: translateY(-150%);
-                transition: all 0.3s ease;
-                z-index: 99;
-            }
-
-            .nav-links.active {
-                transform: translateY(0);
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            section {
-                padding: 4rem 0;
-            }
-
-            .section-heading h2 {
-                font-size: 2rem;
-            }
-
-            .skill-card, .project-card, .contact-info {
-                margin-bottom: 1rem;
-            }
-        }
-    </style>
+    <title>Peter Claus | Unity Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="root"></div>
+    <!-- Header & Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">Peter Claus</a>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#Competencies">Skills & Achievements</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button class="theme-toggle" aria-label="Toggle theme">
+                        <i class="fas fa-lightbulb"></i>
+                    </button>
+                    <button class="mobile-menu-btn" aria-label="Toggle menu">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
 
-    <script type="text/babel">
-        // Function to scroll to section
-        const scrollToSection = (id) => {
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        };
-
-        // App Component
-        const App = () => {
-            const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-
-            const toggleMobileMenu = () => {
-                setMobileMenuOpen(!mobileMenuOpen);
-            };
-
-            return (
-                <>
-                    <header>
-                        <div className="container">
-                            <nav>
-                                <div className="logo">李明</div>
-                                <div className={`nav-links ${mobileMenuOpen ? 'active' : ''}`}>
-                                    <a href="#about" onClick={() => scrollToSection('about')}>About</a>
-                                    <a href="#skills" onClick={() => scrollToSection('skills')}>Skills</a>
-                                    <a href="#projects" onClick={() => scrollToSection('projects')}>Projects</a>
-                                    <a href="#contact" onClick={() => scrollToSection('contact')}>Contact</a>
+    <!-- Hero Section -->
+    <section class="hero" id="about">
+        <div class="container">
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>Hello, I'm <span class="accent-text">Peter Claus</span></h1>
+                    <div class="hero-buttons">
+                        <a href="#contact" class="btn btn-primary">Contact Me</a>
+                        <a href="#projects" class="btn btn-outline">View Projects</a>
+                    </div>
+                </div>
+                
+                <div class="profile-card">
+                    <div class="profile-card-inner">
+                        <div class="profile-card-front">
+                            <div class="profile-img-container">
+                                <div class="profile-img">
+                                    <img src="head.jpg" alt="Peter Claus" />
                                 </div>
-                                <div className="mobile-menu-btn" onClick={toggleMobileMenu}>
-                                    <i className={`fas ${mobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
-                                </div>
-                            </nav>
-                        </div>
-                    </header>
-
-                    <section className="hero" id="about">
-                        <div className="container">
-                            <div className="hero-content">
-                                <h1>Hello, I'm <span className="highlight">李明</span>. 👋<br />Unity Game Developer</h1>
-                                <p>I'm a second-year CS student from China, focusing on Unity game development. I'm passionate about creating immersive gaming experiences and I'm currently looking for remote internship opportunities or open-source collaborations.</p>
-                                <div>
-                                    <a href="#contact" className="btn" onClick={() => scrollToSection('contact')}>Contact Me</a>
-                                    <a href="#projects" className="btn btn-outline" style={{ marginLeft: '1rem' }} onClick={() => scrollToSection('projects')}>View Projects</a>
-                                </div>
+                            </div>
+                            <div class="profile-info">
+                                <h2>Peter Claus</h2>
+                                <h3>Unity Developer & CS Student</h3>
+                                <p>learn more about me</p>
                             </div>
                         </div>
-                    </section>
-
-                    <section id="skills">
-                        <div className="container">
-                            <div className="section-heading">
-                                <h2>Skills & Expertise</h2>
-                                <p>Here are the technologies and tools I specialize in</p>
-                            </div>
-
-                            <div className="skills-container">
-                                <div className="skill-card">
-                                    <div className="skill-icon">
-                                        <i className="fas fa-gamepad"></i>
+                        <div class="profile-card-back">
+                            <h2>About Me</h2>
+                            <p>I'm a second-year Computer Science undergraduate with a passion for game development whose real name is Yao Zhao(赵耀).</p>
+                            <p>Currently based in China, I specialize in Unity development while exploring others like AIGC, MCP. </p>
+                            <div class="profile-details">
+                                <div class="profile-detail-item">
+                                    <div class="profile-detail-icon">
+                                        <i class="fas fa-graduation-cap"></i>
                                     </div>
-                                    <h3>Unity Development</h3>
-                                    <ul className="skill-list">
-                                        <li>Unity 2D/3D Game Development</li>
-                                        <li>C# Programming</li>
-                                        <li>Game Optimization</li>
-                                        <li>Cross-Platform Development</li>
-                                    </ul>
-                                </div>
-
-                                <div className="skill-card">
-                                    <div className="skill-icon">
-                                        <i className="fas fa-code"></i>
-                                    </div>
-                                    <h3>Game Systems</h3>
-                                    <ul className="skill-list">
-                                        <li>Finite State Machines (FSM)</li>
-                                        <li>UI Development</li>
-                                        <li>Game Physics</li>
-                                        <li>Gameplay Mechanics</li>
-                                    </ul>
-                                </div>
-
-                                <div className="skill-card">
-                                    <div className="skill-icon">
-                                        <i className="fas fa-paint-brush"></i>
-                                    </div>
-                                    <h3>Graphics & Animation</h3>
-                                    <ul className="skill-list">
-                                        <li>Spine Animation</li>
-                                        <li>Shader Development</li>
-                                        <li>Particle Systems</li>
-                                        <li>Animation Controllers</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section id="projects">
-                        <div className="container">
-                            <div className="section-heading">
-                                <h2>Featured Projects</h2>
-                                <p>Check out some of my recent work</p>
-                            </div>
-
-                            <div className="projects-container">
-                                <div className="project-card">
-                                    <div className="project-img">
-                                        <i className="fas fa-dungeon"></i>
-                                    </div>
-                                    <div className="project-content">
-                                        <h3>Dungeon Explorer</h3>
-                                        <p>A 2D roguelike dungeon crawler game with procedurally generated levels, character progression, and challenging enemies.</p>
-                                        <div className="project-links">
-                                            <a href="#" className="btn btn-outline">View Demo</a>
-                                            <a href="#" className="btn" style={{ marginLeft: '1rem' }}>GitHub</a>
-                                        </div>
+                                    <div>
+                                        <strong>Education:</strong> Computer Science
                                     </div>
                                 </div>
-
-                                <div className="project-card">
-                                    <div className="project-img">
-                                        <i className="fas fa-rocket"></i>
+                                <div class="profile-detail-item">
+                                    <div class="profile-detail-icon">
+                                        <i class="fas fa-code"></i>
                                     </div>
-                                    <div className="project-content">
-                                        <h3>Space Odyssey</h3>
-                                        <p>A 3D space simulation game where players explore galaxies, complete missions, and engage in strategic space combat.</p>
-                                        <div className="project-links">
-                                            <a href="#" className="btn btn-outline">View Demo</a>
-                                            <a href="#" className="btn" style={{ marginLeft: '1rem' }}>GitHub</a>
-                                        </div>
+                                    <div>
+                                        <strong>Expertise:</strong> Unity, C#, Game Dev
+                                    </div>
+                                </div>
+                                <div class="profile-detail-item">
+                                    <div class="profile-detail-icon">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <div>
+                                        <strong>Looking for:</strong> Remote Internships
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                    <section id="contact">
-                        <div className="container">
-                            <div className="section-heading">
-                                <h2>Get In Touch</h2>
-                                <p>Feel free to reach out for collaborations or just a friendly chat</p>
+    <!-- Combined Skills & Achievements Section -->
+    <section id="Competencies">
+        <div class="container">
+            <div class="section-title">
+                <h2>Skills & Achievements</h2>
+                <p>My expertise and recognitions in the field</p>
+            </div>
+
+            <!-- Skills Scrolling Container -->
+            <h3 class="sub-section-title">Technical Skills</h3>
+            <div class="scroll-container" id="skills-scroll">
+                <div class="scroll-track">
+                    <!-- 原始内容 -->
+                    <div class="scroll-item skill-scroll-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>Game Development</h3>
+                        <ul class="skill-list">
+                            <li>Unity engine (2D/3D)</li>
+                            <li>C# programming</li>
+                            <li>Game architecture design</li>
+                            <li>UI systems</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="scroll-item skill-scroll-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Programming & Technical</h3>
+                        <ul class="skill-list">
+                            <li>Primary: C# for Unity development</li>
+                            <li>Supporting: Python (data analysis)</li>
+                            <li>C++ foundations</li>
+                            <li>Version control with Git</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="scroll-item skill-scroll-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Visual & Design</h3>
+                        <ul class="skill-list">
+                            <li>3D modeling (SW3D and 3ds Max)</li>
+                            <li>Basic Photoshop skills</li>
+                            <li>UI/UX for game interfaces</li>
+                            <li>Visual storytelling</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="scroll-item skill-scroll-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Continuous learning</h3>
+                        <ul class="skill-list">
+                            <li>Mathematical modeling</li>
+                            <li>Multi-agent control systems (MCP)</li>
+                            <li>AIGC technologies</li>
+                            <li>Deep learning foundations</li>
+                        </ul>
+                    </div>
+                    
+                    <!-- 复制的内容，确保无缝循环 -->
+                    <div class="scroll-item skill-scroll-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3>Game Development</h3>
+                        <ul class="skill-list">
+                            <li>Unity engine (2D/3D)</li>
+                            <li>C# programming</li>
+                            <li>Game architecture design</li>
+                            <li>UI systems</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="scroll-item skill-scroll-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Programming & Technical</h3>
+                        <ul class="skill-list">
+                            <li>Primary: C# for Unity development</li>
+                            <li>Supporting: Python (data analysis)</li>
+                            <li>C++ foundations</li>
+                            <li>Version control with Git</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="scroll-item skill-scroll-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Visual & Design</h3>
+                        <ul class="skill-list">
+                            <li>3D modeling (SW3D and 3ds Max)</li>
+                            <li>Basic Photoshop skills</li>
+                            <li>UI/UX for game interfaces</li>
+                            <li>Visual storytelling</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="scroll-item skill-scroll-item">
+                        <div class="skill-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Continuous learning</h3>
+                        <ul class="skill-list">
+                            <li>Mathematical modeling</li>
+                            <li>Multi-agent control systems (MCP)</li>
+                            <li>AIGC technologies</li>
+                            <li>Deep learning foundations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Achievements Scrolling Container -->
+            <h3 class="sub-section-title">Achievements & Recognition</h3>
+            <div class="scroll-container" id="achievements-scroll">
+                <div class="scroll-track">
+                    <!-- 原始内容 -->
+                    <div class="scroll-item achievement-scroll-item">
+                        <h3>Undergraduate Research Award</h3>
+                        <p>Served as the lead presenter in an A-level Undergraduate Innovation Project at Central China Normal University, responsible for algorithm development and deployment in image recognition. Project successfully completed.</p>
+                    </div>
+                    
+                    <div class="scroll-item achievement-scroll-item">
+                        <h3>Published Research</h3>
+                        <p>Co-author of a conference paper published in IEEE ICSECE 2024, contributing to the academic discourse in computer science and engineering.</p>
+                    </div>
+                    
+                    <div class="scroll-item achievement-scroll-item">
+                        <h3>Innovation Competition</h3>
+                        <p>First Prize winner in a university-level entrepreneurship and innovation competition , viewnstrating both technical and practical business application skills.</p>
+                    </div>
+                    
+                    <div class="scroll-item achievement-scroll-item">
+                        <h3>Internet+ Finalist</h3>
+                        <p>Second Prize in the campus-level round of the China International College Students' Innovation and Entrepreneurship Competition, for developing a practical and innovative project.</p>
+                    </div>
+                    
+                    <!-- 复制的内容，确保无缝循环 -->
+                    <div class="scroll-item achievement-scroll-item">
+                        <h3>Undergraduate Research Award</h3>
+                        <p>Recipient of an A-level Undergraduate Research Award from Central China Normal University, recognizing innovation and technical excellence.</p>
+                    </div>
+                    
+                    <div class="scroll-item achievement-scroll-item">
+                        <h3>Published Research</h3>
+                        <p>Co-author of a conference paper published in IEEE ICSECE 2024, contributing to the academic discourse in computer science and engineering.</p>
+                    </div>
+                    
+                    <div class="scroll-item achievement-scroll-item">
+                        <h3>Innovation Competition</h3>
+                        <p>First Prize winner in a university-level entrepreneurship and innovation competition (三创赛), demonstrating both technical and practical business application skills.</p>
+                    </div>
+                    
+                    <div class="scroll-item achievement-scroll-item">
+                        <h3>Game Jam Finalist</h3>
+                        <p>Finalist in the 2023 Global Game Jam, creating a complete game prototype in 48 hours with a small team of developers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-title">
+                <h2>Featured Projects</h2>
+                <p>Check out some of my recent work</p>
+            </div>
+
+            <div class="project-carousel">
+                <!-- 左箭头 -->
+                <button class="carousel-arrow arrow-left">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            
+                <!-- 项目容器 -->
+                <div class="project-carousel-container">
+                    <div class="project-carousel-track">
+                        <!-- 原有项目 -->
+                        <div class="project-card card">
+                            <div class="project-img">
+                                <i class="fas fa-dungeon"></i>
                             </div>
-
-                            <div className="contact-container">
-                                <div className="contact-info">
-                                    <h3>Contact Information</h3>
-                                    <ul className="contact-list">
-                                        <li>
-                                            <div className="contact-icon">
-                                                <i className="fas fa-envelope"></i>
-                                            </div>
-                                            <a href="mailto:liming@example.com">liming@example.com</a>
-                                        </li>
-                                        <li>
-                                            <div className="contact-icon">
-                                                <i className="fab fa-github"></i>
-                                            </div>
-                                            <a href="https://github.com/yourusername" target="_blank">github.com/yourusername</a>
-                                        </li>
-                                        <li>
-                                            <div className="contact-icon">
-                                                <i className="fab fa-linkedin"></i>
-                                            </div>
-                                            <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin.com/in/yourusername</a>
-                                        </li>
-                                    </ul>
+                            <div class="project-content">
+                                <h3>Dungeon Explorer</h3>
+                                <p>A 2D roguelike dungeon crawler with procedurally generated levels. Features character progression, challenging enemies, and strategic combat mechanics in a fantasy setting.</p>
+                                <div class="project-links">
+                                    <a href="#" class="btn btn-outline">view</a>
+                                    <a href="#" class="btn btn-primary">GitHub</a>
                                 </div>
                             </div>
                         </div>
-                    </section>
 
-                    <footer>
-                        <div className="container">
-                            <p>&copy; 2025 李明 | Unity Game Developer</p>
+                        <div class="project-card card">
+                            <div class="project-img">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <div class="project-content">
+                                <h3>Space Odyssey</h3>
+                                <p>A 3D space simulation game where players explore galaxies, complete missions, and engage in strategic space combat. Features realistic physics and an immersive universe to discover.</p>
+                                <div class="project-links">
+                                    <a href="#" class="btn btn-outline">view</a>
+                                    <a href="#" class="btn btn-primary">GitHub</a>
+                                </div>
+                            </div>
                         </div>
-                    </footer>
-                </>
-            );
-        };
+                        
+                        <!-- 新增项目 -->
+                        <div class="project-card card">
+                            <div class="project-img">
+                                <i class="fas fa-dragon"></i>
+                            </div>
+                            <div class="project-content">
+                                <h3>Dream Westward: The Return</h3>
+                                <p>A 2D side-scrolling RPG game that pays tribute to the classic Chinese "Dream Westward Journey" series. Features well-developed gameplay mechanics with original innovations and vibrant visuals.</p>
+                                <div class="project-links">
+                                    <a href="#" class="btn btn-outline">view</a>
+                                    <a href="#" class="btn btn-primary">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="project-card card">
+                            <div class="project-img">
+                                <i class="fas fa-car-side"></i>
+                            </div>
+                            <div class="project-content">
+                                <h3>Felony Run</h3>
+                                <p>A 3D action game where you play as a fugitive escaping from four police vehicles. Set in a city environment, you must strategically outdrive pursuers across varied terrain with limited fuel resources.</p>
+                                <div class="project-links">
+                                    <a href="#" class="btn btn-outline">view</a>
+                                    <a href="#" class="btn btn-primary">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    
+                        <div class="project-card card">
+                            <div class="project-img">
+                                <i class="fas fa-fist-raised"></i>
+                            </div>
+                            <div class="project-content">
+                                <h3>Black Myth: Brawl</h3>
+                                <p>An unconventional MOBA game inspired by "Black Myth: Wukong", preserving key combat mechanics and mythical themes while introducing fresh competitive systems for dynamic team battles.</p>
+                                <div class="project-links">
+                                    <a href="#" class="btn btn-outline">view</a>
+                                    <a href="#" class="btn btn-primary">GitHub</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- 右箭头 -->
+                <button class="carousel-arrow arrow-right">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
 
-        // Render the App
-        ReactDOM.render(<App />, document.getElementById('root'));
-    </script>
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get In Touch</h2>
+                <p>Feel free to reach out for collaborations or just a friendly chat</p>
+            </div>
+
+            <div class="contact-container card">
+                <div class="contact-text">
+                    <p>If you're interested in collaborating on my game projects, I'm always open to meaningful partnerships. Whether it's game development, open-source initiatives, or just exchanging ideas about interactive tech—feel free to reach out!</p>
+                </div>
+                <div class="contact-links">
+                    <a href="mailto:peterclaus622@gmail.com" class="contact-link">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <span>peterclaus622@gmail.com</span>
+                    </a>
+                    <a href="https://github.com/Peter-Plus" target="_blank" class="contact-link">
+                        <div class="contact-icon">
+                            <i class="fab fa-github"></i>
+                        </div>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://linkedin.com/in/peter-claus" target="_blank" class="contact-link">
+                        <div class="contact-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <span>LinkedIn</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Peter Claus. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

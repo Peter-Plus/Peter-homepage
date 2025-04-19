@@ -1,0 +1,333 @@
+/* 
+ * carousel.css
+ * 循环横向滚动组件样式
+ */
+
+/* 通用滚动容器 */
+.scroll-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: 2rem 0;
+  }
+  
+  /* 循环滚动轨道 */
+  .scroll-track {
+    display: flex;
+    width: fit-content;
+    animation: scroll 30s linear infinite;
+  }
+  
+  /* 当鼠标悬停在容器或任何子元素上时暂停滚动动画 */
+  .scroll-container:hover .scroll-track,
+  .scroll-item:hover .scroll-track,
+  .scroll-track:hover {
+    animation-play-state: paused;
+  }
+  
+  /* 滚动内容项 */
+  .scroll-item {
+    flex: 0 0 auto;
+    padding: 1.5rem;
+    margin-right: 1.5rem;
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    transition: all var(--transition-normal);
+    min-width: 300px;
+    max-width: 350px;
+  }
+  
+  .scroll-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+  }
+  
+  /* Skills 专用样式 */
+  .skill-scroll-item {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .skill-scroll-item .skill-icon {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    transition: color var(--transition-normal);
+  }
+  
+  .skill-scroll-item h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* 确保滚动项内的技能列表符合滚动卡片风格 */
+  .skill-scroll-item .skill-list {
+    list-style: none;
+    margin-left: 0;
+  }
+  
+  .skill-scroll-item .skill-list li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    color: var(--text-secondary);
+    transition: color var(--transition-normal);
+  }
+  
+  .skill-scroll-item .skill-list li::before {
+    content: "•";
+    color: var(--accent);
+    font-weight: bold;
+    margin-right: 0.75rem;
+    transition: color var(--transition-normal);
+  }
+  
+  /* Achievements 专用样式 */
+  .achievement-scroll-item {
+    border-left: 3px solid var(--accent);
+    padding-left: 1.5rem;
+    transition: border-color var(--transition-normal);
+  }
+  
+  .achievement-scroll-item h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* 滚动动画 */
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  /* 为容器添加左右渐变阴影，增强滚动视觉效果 */
+  .scroll-container::before,
+  .scroll-container::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 50px;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none; /* 确保不会阻止悬停事件 */
+  }
+  
+  .scroll-container::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-secondary), transparent);
+  }
+  
+  .scroll-container::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-secondary), transparent);
+  }
+  
+  /* 在小屏幕上调整滚动项大小 */
+  @media (max-width: 768px) {
+    .scroll-item {
+      min-width: 270px;
+      padding: 1.25rem;
+    }
+    
+    .scroll-container::before,
+    .scroll-container::after {
+      width: 30px;
+    }
+  }
+  
+  /* 子标题样式 */
+  .sub-section-title {
+    font-size: 1.75rem;
+    margin: 3rem 0 1.5rem;
+    text-align: left;
+    position: relative;
+    padding-left: 1rem;
+  }
+  
+  .sub-section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    height: 0.8em;
+    width: 4px;
+    background-color: var(--accent);
+    border-radius: 2px;
+  }
+  
+  /* 项目轮播样式 - 优化版 */
+  .project-carousel {
+    position: relative;
+    width: 100%;
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+  }
+  
+  .project-carousel-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 1.5rem 0;
+  }
+  
+  .project-carousel-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  
+  /* 项目卡片样式 - 确保所有卡片大小一致 */
+  .project-carousel .project-card {
+    flex: 0 0 auto;
+    width: 350px;
+    height: 550px; /* 固定高度确保一致性 */
+    margin: 0 15px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-bg);
+    box-shadow: var(--card-shadow);
+    transition: all var(--transition-normal);
+  }
+  
+  .project-carousel .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  /* 项目图标区域 - 统一大小和位置 */
+  .project-carousel .project-img {
+    height: 200px;
+    background-color: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    color: var(--accent);
+    transition: all var(--transition-normal);
+  }
+  
+  /* 项目内容区域 - 固定结构确保按钮位置一致 */
+  .project-carousel .project-content {
+    flex: 1;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 改为两端对齐，使按钮更靠下 */
+  }
+  
+  .project-carousel .project-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    height: 60px; /* 固定标题高度 */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .project-carousel .project-content p {
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+    color: var(--text-secondary);
+    height: 175px; /* 固定描述文本高度 */
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 9; /* 限制最多显示7行 */
+    -webkit-box-orient: vertical;
+  }
+  
+  .project-carousel .project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 50px; /* 添加额外上边距推动按钮下移 */
+    height: 60px; /* 固定按钮区域高度 */
+    align-items: center;
+  }
+  
+  /* 轮播箭头样式 */
+  .carousel-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: var(--accent);
+    color: white;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    z-index: 2;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+  }
+  
+  .carousel-arrow:hover {
+    background-color: var(--accent-hover);
+    transform: scale(1.1);
+  }
+  
+  .carousel-arrow:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--text-secondary);
+    transform: none;
+  }
+  
+  .arrow-left {
+    margin-right: 1rem;
+  }
+  
+  .arrow-right {
+    margin-left: 1rem;
+  }
+  
+  /* 响应式调整 */
+  @media (max-width: 992px) {
+    .project-carousel .project-card {
+      width: 320px;
+      height: 480px;
+    }
+    
+    .project-carousel .project-content p {
+      height: 140px;
+      -webkit-line-clamp: 6;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .project-carousel .project-card {
+      width: 280px;
+      height: 450px;
+    }
+    
+    .project-carousel .project-content h3 {
+      height: 50px;
+    }
+    
+    .project-carousel .project-content p {
+      height: 130px;
+      -webkit-line-clamp: 5;
+    }
+    
+    .carousel-arrow {
+      width: 40px;
+      height: 40px;
+      font-size: 1rem;
+    }
+    
+    .sub-section-title {
+      font-size: 1.5rem;
+      margin: 2rem 0 1rem;
+    }
+  }

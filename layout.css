@@ -1,0 +1,81 @@
+/* 
+ * layout.css
+ * 负责基础布局、栅格系统、container、section、响应式结构
+ */
+
+ .container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+section {
+    padding: var(--section-spacing) 0;
+    transition: background-color var(--transition-normal);
+}
+
+section:nth-child(odd) {
+    background-color: var(--bg-secondary);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.section-title h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.section-title p {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 2rem 0;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border);
+    transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.sub-section-title {
+    font-size: 1.75rem;
+    margin: 3rem 0 1.5rem;
+    text-align: left;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.sub-section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.2em;
+    height: 0.8em;
+    width: 4px;
+    background-color: var(--accent);
+    border-radius: 2px;
+}
+
+/* Responsive Design - Layout Adjustments */
+@media (max-width: 992px) {
+    .section-title h2 {
+        font-size: 2.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-spacing: 4rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .section-title h2 {
+        font-size: 2rem;
+    }
+}

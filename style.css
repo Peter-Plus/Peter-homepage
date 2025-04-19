@@ -1,0 +1,19 @@
+/*
+ * style.css
+ * 主入口文件，引入所有模块化的CSS文件
+ */
+
+/* 基础重置样式与通用规则 */
+@import 'reset.css';
+
+/* 布局结构 */
+@import 'layout.css';
+
+/* 组件样式 */
+@import 'components.css';
+
+/* 循环滚动组件样式 */
+@import 'carousel.css';
+
+/* 页面模块样式 */
+@import 'sections.css';
