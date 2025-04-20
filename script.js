@@ -158,6 +158,159 @@ function initProjectCarousel() {
     });
 }
 
+// 3D 卡片倾斜效果初始化
+function init3DCards() {
+    const cards = document.querySelectorAll('.project-card');
+    
+    cards.forEach(card => {
+        // 为卡片添加3D效果所需的CSS类
+        card.classList.add('card-3d');
+        
+        // 为卡片内容元素添加3D效果类
+        const img = card.querySelector('.project-img');
+        const title = card.querySelector('.project-content h3');
+        const content = card.querySelector('.project-content p');
+        const links = card.querySelector('.project-links');
+        
+        if (img) img.classList.add('card-3d-element');
+        if (title) title.classList.add('card-3d-element');
+        if (content) content.classList.add('card-3d-element');
+        if (links) links.classList.add('card-3d-element');
+        
+        // 鼠标移动处理
+        card.addEventListener('mousemove', e => {
+            const cardRect = card.getBoundingClientRect();
+            const cardCenterX = cardRect.left + cardRect.width / 2;
+            const cardCenterY = cardRect.top + cardRect.height / 2;
+            const mouseX = e.clientX - cardCenterX;
+            const mouseY = e.clientY - cardCenterY;
+            
+            // 计算倾斜角度，将鼠标位置映射到 -15 到 15 度的范围
+            const rotateY = 15 * mouseX / (cardRect.width / 2);
+            const rotateX = -15 * mouseY / (cardRect.height / 2);
+            
+            // 设置卡片的3D变换
+            card.style.transform = `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            
+            // 为子元素添加不同的3D位移，增强立体感
+            if (img) img.style.transform = `translateZ(30px)`;
+            if (title) title.style.transform = `translateZ(25px)`;
+            if (content) content.style.transform = `translateZ(20px)`;
+            if (links) links.style.transform = `translateZ(15px)`;
+        });
+        
+        // 鼠标离开时恢复原状
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = '';
+            
+            if (img) img.style.transform = '';
+            if (title) title.style.transform = '';
+            if (content) content.style.transform = '';
+            if (links) links.style.transform = '';
+        });
+    });
+}
+
+// 粒子背景初始化
+function initParticles() {
+    if (typeof particlesJS !== 'undefined') {
+        particlesJS('particles-js', {
+            particles: {
+                number: { 
+                    value: 80, 
+                    density: { enable: true, value_area: 800 } 
+                },
+                color: { value: "#3b82f6" },
+                shape: { type: "circle" },
+                opacity: { 
+                    value: 0.5, 
+                    random: true,
+                    anim: { enable: true, speed: 1, opacity_min: 0.1, sync: false }
+                },
+                size: { 
+                    value: 3, 
+                    random: true,
+                    anim: { enable: true, speed: 2, size_min: 0.3, sync: false }
+                },
+                line_linked: {
+                    enable: true,
+                    distance: 150,
+                    color: "#3b82f6",
+                    opacity: 0.4,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 2,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    out_mode: "out",
+                    bounce: false,
+                    attract: { enable: false, rotateX: 600, rotateY: 1200 }
+                }
+            },
+            interactivity: {
+                detect_on: "canvas",
+                events: {
+                    onhover: { enable: true, mode: "repulse" },
+                    onclick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    repulse: { distance: 100, duration: 0.4 },
+                    push: { particles_nb: 4 },
+                    remove: { particles_nb: 2 }
+                }
+            },
+            retina_detect: true
+        });
+        
+        // 根据主题动态调整粒子颜色
+        const updateParticlesTheme = (isDark) => {
+            if (pJSDom && pJSDom[0] && pJSDom[0].pJS) {
+                // 更新粒子颜色
+                const newColor = isDark ? "#6ea8fe" : "#3b82f6";
+                pJSDom[0].pJS.particles.array.forEach((p) => {
+                    p.color.value = newColor;
+                    p.color.rgb = hexToRgb(newColor);
+                });
+                
+                // 更新连接线颜色
+                pJSDom[0].pJS.particles.line_linked.color = newColor;
+                pJSDom[0].pJS.particles.line_linked.color_rgb_line = hexToRgb(newColor);
+            }
+        };
+        
+        // 主题切换时更新粒子颜色
+        const themeToggle = document.querySelector('.theme-toggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const isDark = document.body.classList.contains('dark-mode');
+                setTimeout(() => updateParticlesTheme(isDark), 100);
+            });
+            
+            // 初始化时也更新一次
+            const isDark = document.body.classList.contains('dark-mode');
+            setTimeout(() => updateParticlesTheme(isDark), 100);
+        }
+    }
+}
+
+// 辅助函数: 十六进制颜色转RGB
+function hexToRgb(hex) {
+    // 移除可能的 # 前缀
+    hex = hex.replace(/^#/, '');
+    
+    // 解析 RGB 值
+    const bigint = parseInt(hex, 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    
+    return { r, g, b };
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     const themeToggle = document.querySelector('.theme-toggle');
     const icon = themeToggle?.querySelector('i');
@@ -258,6 +411,12 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 初始化项目轮播
     initProjectCarousel();
+    
+    // 初始化3D卡片效果
+    init3DCards();
+    
+    // 初始化粒子效果
+    initParticles();
     
     // 窗口大小改变时重新初始化
     window.addEventListener('resize', () => {
